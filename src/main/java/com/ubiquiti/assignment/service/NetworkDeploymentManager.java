@@ -48,10 +48,13 @@ public class NetworkDeploymentManager {
     public void registerDevice(DeviceType deviceType, String macAddress, @Nullable String uplinkMacAddress) {
         Objects.requireNonNull(deviceType, "Device type cannot be null");
         Objects.requireNonNull(macAddress, "MAC address cannot be null");
-        // TODO: verify input parameters - mac address validity
 
         if (storage.get(macAddress).isDefined()) {
             throw new IllegalArgumentException("Device with '%s' MAC address already exists".formatted(macAddress));
+        }
+
+        if (uplinkMacAddress == null && !storage.isEmpty()) {
+            throw new IllegalArgumentException("Root device already exists, uplink MAC address is required");
         }
 
         if (uplinkMacAddress != null) {
@@ -128,6 +131,10 @@ public class NetworkDeploymentManager {
                         .downlinkDevices(entry.getChildren().map(this::getDeviceSubtree))
                         .build())
                 .getOrElseThrow(() -> new NoSuchElementException("Device with '%s' MAC address does not exist".formatted(macAddress)));
+    }
+
+    public void reset() {
+        storage = LinkedHashMap.empty();
     }
 
     @Value

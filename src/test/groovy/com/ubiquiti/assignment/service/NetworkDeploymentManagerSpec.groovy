@@ -52,6 +52,18 @@ class NetworkDeploymentManagerSpec extends Specification {
         ex.message == "Uplink device with '$uplinkMacAddress' MAC address does not exist"
     }
 
+    def "cannot register a second device without uplink when root already exists"() {
+        given:
+        sut.registerDevice(GATEWAY, "abcd", null)
+
+        when:
+        sut.registerDevice(SWITCH, "efgh", null)
+
+        then:
+        def ex = thrown(IllegalArgumentException)
+        ex.message == "Root device already exists, uplink MAC address is required"
+    }
+
     def "device cannot reference itself as uplink device"() {
         given:
         def macAddress = "abcd"

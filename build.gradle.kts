@@ -36,6 +36,8 @@ dependencies {
     implementation("io.vavr:vavr-jackson:0.10.3")
 
     testImplementation("org.spockframework:spock-core:2.4-M5-groovy-4.0")
+    testImplementation("org.spockframework:spock-spring:2.4-M5-groovy-4.0")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.apache.groovy:groovy-all:4.0.26")
     testImplementation("org.mockito:mockito-core:5.16.1")
 }

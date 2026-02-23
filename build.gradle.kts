@@ -20,6 +20,10 @@ plugins {
 group = "com.ubiquiti.assignment"
 version = "1.0.0"
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+}
+
 
 
 repositories {

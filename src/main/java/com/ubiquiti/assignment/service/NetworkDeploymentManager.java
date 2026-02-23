@@ -106,7 +106,7 @@ public class NetworkDeploymentManager {
      */
     public NetworkingDeviceNode getDeviceTree() {
         if (storage.isEmpty()) {
-            throw new IllegalStateException("Network deployment does not contain any devices");
+            throw new NoSuchElementException("Network deployment does not contain any devices");
         }
 
         return getDeviceSubtree(storage.head()._1);

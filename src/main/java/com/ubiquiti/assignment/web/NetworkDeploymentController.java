@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class NetworkDeploymentController {
     private final NetworkDeploymentManager manager;
-
-    // TODO: validators
+    private final MacAddressValidator macAddressValidator;
 
     @PostMapping("/devices")
     public void registerDevice(@RequestBody RegisterDevicePayload payload) {
+        macAddressValidator.validate(payload.macAddress);
+        if (payload.uplinkMacAddress != null) {
+            macAddressValidator.validate(payload.uplinkMacAddress);
+        }
         manager.registerDevice(payload.deviceType, payload.macAddress, payload.uplinkMacAddress);
     }
 
@@ -27,6 +30,7 @@ public class NetworkDeploymentController {
 
     @GetMapping("/devices/{macAddress}")
     public NetworkingDeviceDescriptor get(@PathVariable String macAddress) {
+        macAddressValidator.validate(macAddress);
         return manager.get(macAddress);
     }
 
@@ -37,6 +41,7 @@ public class NetworkDeploymentController {
 
     @GetMapping("/devices/tree/{macAddress}")
     public NetworkingDeviceNode getSubTree(@PathVariable String macAddress) {
+        macAddressValidator.validate(macAddress);
         return manager.getDeviceSubtree(macAddress);
     }
 

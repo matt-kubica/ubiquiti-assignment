@@ -214,7 +214,7 @@ class NetworkDeploymentManagerSpec extends Specification {
         sut.getDeviceTree()
 
         then:
-        def ex = thrown(IllegalStateException)
+        def ex = thrown(NoSuchElementException)
         ex.message == "Network deployment does not contain any devices"
     }
 

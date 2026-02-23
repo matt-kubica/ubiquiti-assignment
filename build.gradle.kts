@@ -13,6 +13,8 @@ plugins {
     id("groovy")
     id("jacoco")
     id("info.solidsoft.pitest") version "1.15.0"
+    id("org.springframework.boot") version "3.4.2"
+    id("io.spring.dependency-management") version "1.1.7"
 }
 
 group = "com.ubiquiti.assignment"
@@ -28,8 +30,10 @@ dependencies {
     compileOnly("org.projectlombok:lombok:1.18.30")
     annotationProcessor("org.projectlombok:lombok:1.18.30")
 
+    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("jakarta.annotation:jakarta.annotation-api:3.0.0")
     implementation("io.vavr:vavr:0.10.6")
+    implementation("io.vavr:vavr-jackson:0.10.3")
 
     testImplementation("org.spockframework:spock-core:2.4-M5-groovy-4.0")
     testImplementation("org.apache.groovy:groovy-all:4.0.26")

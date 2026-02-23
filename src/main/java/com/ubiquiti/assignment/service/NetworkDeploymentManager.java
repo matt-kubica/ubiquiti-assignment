@@ -9,6 +9,8 @@ import jakarta.annotation.*;
 import lombok.*;
 import lombok.Value;
 
+import org.springframework.stereotype.*;
+
 import java.util.*;
 
 import static java.util.Comparator.*;
@@ -30,6 +32,7 @@ import static java.util.Comparator.*;
  * This implementation uses in-memory storage, however it is possible to extract an interface
  * and provide similar implementation that would use other kind of persistence, such as relational or NoSQL database.
  */
+@Component
 public class NetworkDeploymentManager {
 
     private LinkedHashMap<String, NetworkingDeviceEntry> storage = LinkedHashMap.empty();
